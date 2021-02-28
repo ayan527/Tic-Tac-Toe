@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Board from './components/Board';
+import GameStart from './components/GameStart';
 import { calculateWinner } from './helper';
 
 // Import styling sheet
@@ -7,6 +8,7 @@ import './styles/root.scss';
 
 const App = () => {
   // Initializing the state of the board : 9 boxes are null
+
   const [board, setBoard] = useState(Array(9).fill(null));
 
   // Function gets called everytime the component gets rerendered with updated board
@@ -46,12 +48,18 @@ const App = () => {
     setXNext(previous => !previous);
   };
 
+  const restartGame = () => {
+    setBoard(() => Array(9).fill(null));
+    setXNext(() => true);
+  };
+
   // Sharing of state between components through props
   return (
     <div className="app">
       <h1>TIC TAC TOE</h1>
       <h2>{message}</h2>
       <Board board={board} handleSquareButton={handleSquareButton} />
+      {!board.every(el => el === null) && <GameStart onClick={restartGame} />}
     </div>
   );
 };
