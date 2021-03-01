@@ -1,9 +1,9 @@
 import React from 'react';
 
-const GameStart = ({ restartGame }) => {
+const GameStart = ({ onClick }) => {
   return (
     <div>
-      <button type="button" onClick={() => restartGame()}>
+      <button type="button" onClick={() => onClick()}>
         Restart Game
       </button>
     </div>
