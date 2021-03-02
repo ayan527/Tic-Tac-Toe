@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Board from './components/Board';
 import GameStart from './components/GameStart';
+import GameHistory from './components/GameHistory';
 import StatusMessage from './components/StatusMessage';
 import { calculateWinner } from './helper';
 
@@ -57,6 +58,10 @@ const App = () => {
     setCurrentMove(0);
   };
 
+  const moveTo = move => {
+    setCurrentMove(move);
+  };
+
   // Sharing of state between components through props
   return (
     <div className="app">
@@ -70,6 +75,11 @@ const App = () => {
       {!currentState.board.every(el => el === null) && (
         <GameStart onClick={restartGame} />
       )}
+      <GameHistory
+        history={history}
+        currentMove={currentMove}
+        moveTo={moveTo}
+      />
     </div>
   );
 };
