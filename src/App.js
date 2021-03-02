@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Board from './components/Board';
-import GameStart from './components/GameStart';
 import GameHistory from './components/GameHistory';
 import StatusMessage from './components/StatusMessage';
 import { calculateWinner } from './helper';
@@ -65,7 +64,9 @@ const App = () => {
   // Sharing of state between components through props
   return (
     <div className="app">
-      <h1>TIC TAC TOE</h1>
+      <h1>
+        TIC <span className="text-green">TAC</span> TOE
+      </h1>
       <StatusMessage winner={winner} currentState={currentState} />
       <Board
         board={currentState.board}
@@ -73,13 +74,21 @@ const App = () => {
         winningSquares={winningSquares}
       />
       {!currentState.board.every(el => el === null) && (
-        <GameStart onClick={restartGame} />
+        <button
+          type="button"
+          onClick={restartGame}
+          className={`btn-reset ${winner ? 'active' : ''}`}
+        >
+          Restart Game
+        </button>
       )}
+      <h2 style={{ fontWeight: 'normal' }}>Current Game History</h2>
       <GameHistory
         history={history}
         currentMove={currentMove}
         moveTo={moveTo}
       />
+      <div className="bg-balls" />
     </div>
   );
 };
