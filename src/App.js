@@ -24,7 +24,6 @@ const App = () => {
   // Creating a function to handle a square button
   const handleSquareButton = position => {
     //console.log(position);
-
     // Check if the position is already modified or Winner is there
     if (currentState.board[position] || winner) {
       return;
@@ -66,6 +65,7 @@ const App = () => {
       <Board
         board={currentState.board}
         handleSquareButton={handleSquareButton}
+        winningSquares={winningSquares}
       />
       {!currentState.board.every(el => el === null) && (
         <GameStart onClick={restartGame} />
